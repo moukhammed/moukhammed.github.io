@@ -41,6 +41,23 @@
       font-weight: bold;
       color: green;
   }
+
+  /* === Contrôles mobile === */
+  #mobile-controls {
+      display: none;
+      margin-top: 15px;
+      text-align: center;
+  }
+  #mobile-controls button {
+      font-size: 2rem;
+      padding: 15px;
+      margin: 5px;
+      border-radius: 15px;
+      border: none;
+      background: #5b4fff;
+      color: white;
+  }
+
 </style>
 </head>
 <body>
@@ -82,6 +99,14 @@
     <canvas id="game" width="600" height="400"></canvas>
     <button id="start-btn">Commencer</button>
     <button id="restart-btn" style="display:none;">Recommencer</button>
+
+    <!-- === Contrôles mobile === -->
+    <div id="mobile-controls">
+        <button data-key="ArrowLeft">⬅️</button>
+        <button data-key="ArrowUp">⬆️</button>
+        <button data-key="ArrowDown">⬇️</button>
+        <button data-key="ArrowRight">➡️</button>
+    </div>
 </div>
 
 <footer>© 2025 Lumipedia</footer>
@@ -121,20 +146,35 @@ const player = {x: 270, y: 350, width:50, height:50, speed:5, invincible:false, 
 
 let keys = {};
 
+// PC controls
 document.addEventListener('keydown', e => keys[e.key] = true);
 document.addEventListener('keyup', e => keys[e.key] = false);
 
+// ==== Contrôles mobile ====
+if (/Mobi|Android/i.test(navigator.userAgent)) {
+    document.getElementById('mobile-controls').style.display = 'block';
+
+    document.querySelectorAll('#mobile-controls button').forEach(btn => {
+        btn.addEventListener('touchstart', () => {
+            keys[btn.dataset.key] = true;
+        });
+        btn.addEventListener('touchend', () => {
+            keys[btn.dataset.key] = false;
+        });
+    });
+}
+
+// ===== Fonctions du jeu =====
 function spawnCircle(){
-    let radius = Math.random()*20+15; // 15 à 35 px
+    let radius = Math.random()*20+15;
     let x = Math.random()*(canvas.width-radius*2)+radius;
     let y = -radius;
-    let type = Math.random()<0.1 ? 'yellow':'red'; // 10% jaunes
+    let type = Math.random()<0.1 ? 'yellow':'red';
     circles.push({x,y,radius,type});
 }
 
 function updateCircles(){
     circles.forEach(c => c.y += circleSpeed);
-    // Ronds tombés
     circles = circles.filter(c=>{
         if(c.y-c.radius>canvas.height){
             if(c.type==='red') score++;
@@ -242,8 +282,3 @@ restartBtn.addEventListener('click',startGame);
 </script>
 </body>
 </html>
-
-
-
-
-
