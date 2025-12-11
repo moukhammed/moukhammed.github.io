@@ -9,33 +9,59 @@
 
 <body>
 
-<header><h1>Types d’IA</h1></header>
+<header>
+  <h1>Types d’IA</h1>
+  <button id="theme-toggle" class="theme-toggle">🌙 Mode sombre</button>
+</header>
 
 <div class="container">
-<nav>
-    <a href="ia.html">Thème IA</a>
-    <a href="ia-introduction.html">Introduction</a>
-    <a href="applications-ia.html">Applications</a>
-    <a href="ethique-ia.html">Éthique</a>
-</nav>
+  <nav>
+      <a href="ia.html">Thème IA</a>
+      <a href="ia-introduction.html">Introduction</a>
+      <a href="applications-ia.html">Applications</a>
+      <a href="ethique-ia.html">Éthique</a>
+  </nav>
 
-<main>
-<h2>Différents types d’IA</h2>
-<img src="types_ia.jpg" alt="Types IA">
+  <main>
+    <h2>Différents types d’IA</h2>
+    <img src="types_ia.jpg" alt="Types IA">
 
-<h3>IA faible</h3>
-<p>L’IA faible, ou IA étroite, est conçue pour effectuer une seule tâche spécifique. Par exemple, les assistants vocaux comme Siri ou Alexa peuvent comprendre et répondre à des commandes, mais ne possèdent pas de conscience ou de capacités générales.</p>
+    <h3>IA faible</h3>
+    <p>L’IA faible, ou IA étroite, est conçue pour effectuer une seule tâche spécifique. Par exemple, les assistants vocaux comme Siri ou Alexa peuvent comprendre et répondre à des commandes, mais ne possèdent pas de conscience ou de capacités générales.</p>
 
-<h3>IA forte</h3>
-<p>L’IA forte est une intelligence artificielle capable de raisonner et d’apprendre de manière similaire à un être humain. Elle pourrait comprendre des contextes complexes et appliquer ses connaissances à des situations variées, mais elle reste pour l’instant théorique.</p>
+    <h3>IA forte</h3>
+    <p>L’IA forte est une intelligence artificielle capable de raisonner et d’apprendre de manière similaire à un être humain. Elle pourrait comprendre des contextes complexes et appliquer ses connaissances à des situations variées, mais elle reste pour l’instant théorique.</p>
 
-<h3>IA générale et superintelligence</h3>
-<p>L’IA générale viserait à surpasser l’intelligence humaine dans tous les domaines. La superintelligence serait une étape encore plus avancée, où les machines pourraient améliorer elles-mêmes leurs capacités de façon autonome, ce qui soulève de nombreux débats éthiques et de sécurité.</p>
-</main>
+    <h3>IA générale et superintelligence</h3>
+    <p>L’IA générale viserait à surpasser l’intelligence humaine dans tous les domaines. La superintelligence serait une étape encore plus avancée, où les machines pourraient améliorer elles-mêmes leurs capacités de façon autonome, ce qui soulève de nombreux débats éthiques et de sécurité.</p>
+  </main>
 </div>
 
 <footer>© 2025 Lumipedia</footer>
+
+<script>
+// ===== Mode sombre / clair =====
+const btn = document.getElementById('theme-toggle');
+btn.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+    if(document.body.classList.contains('dark-mode')){
+        btn.textContent = '☀️ Mode clair';
+        localStorage.setItem('theme', 'dark');
+    } else {
+        btn.textContent = '🌙 Mode sombre';
+        localStorage.setItem('theme', 'light');
+    }
+});
+
+// ===== Sauvegarde du thème =====
+if(localStorage.getItem('theme') === 'dark'){
+    document.body.classList.add('dark-mode');
+    btn.textContent = '☀️ Mode clair';
+} else {
+    document.body.classList.remove('dark-mode');
+    btn.textContent = '🌙 Mode sombre';
+}
+</script>
+
 </body>
 </html>
-
-
