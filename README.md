@@ -1,1 +1,0 @@
-Lumipedia est un site web moderne et interactif dédié à l’intelligence artificielle et à la cybersécurité. Il combine un design élégant, des animations fluides et des micro-interactions pour offrir une expérience utilisateur immersive.
